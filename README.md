@@ -44,18 +44,6 @@ This system implements the RLM architecture from the [RLM paper](https://arxiv.o
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Implemented Components
-
-| Component | Description | Status |
-|-----------|-------------|--------|
-| RLM Core Engine | Main orchestrator with recursion control | ✅ Complete |
-| Docker Sandbox | Secure code execution with resource limits | ✅ Complete |
-| Multi-Model LLM Client | Rate limiting, caching, circuit breaker | ✅ Complete |
-| Document Ingestion | Multi-format parsing (PDF, DOCX, etc.) | ✅ Complete |
-| Async Sub-LLM Manager | Connection pooling, batch processing | ✅ Complete |
-| Trajectory Visualizer | React UI with tree/timeline/cost views | ✅ Complete |
-| Query Router | Intelligent strategy selection | ✅ Complete |
-
 ---
 
 ## Prerequisites
