@@ -1,0 +1,186 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rlm-document-retrieval"
+version = "0.1.0"
+description = "RLM-Based Document Retrieval System"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "RLM Team"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    # FastAPI and server
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "python-multipart>=0.0.9",
+    "python-jose[cryptography]>=3.3.0",
+    
+    # LLM Integration - LiteLLM for unified interface
+    "litellm>=1.0.0",
+    "openai>=1.12.0",
+    "anthropic>=0.18.0",
+    
+    # Document Processing
+    "PyMuPDF>=1.23.0",
+    "pdfplumber>=0.10.0",
+    "python-docx>=1.1.0",
+    "beautifulsoup4>=4.12.0",
+    "markdown>=3.5.0",
+    "pandas>=2.2.0",
+    
+    # Sandboxing
+    "RestrictedPython>=7.0",
+    
+    # Configuration and Data
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.1.0",
+    
+    # Async and HTTP
+    "aiohttp>=3.9.0",
+    "aiofiles>=23.2.0",
+    
+    # Database
+    "sqlalchemy>=2.0.0",
+    "aiosqlite>=0.20.0",
+    "alembic>=1.13.0",
+    "qdrant-client>=1.7.0",
+    
+    # Logging and Monitoring
+    "structlog>=24.1.0",
+    "prometheus-client>=0.19.0",
+    "rich>=13.7.0",
+    
+    # Utilities
+    "python-dotenv>=1.0.0",
+    "tenacity>=8.2.0",
+    "orjson>=3.9.0",
+    
+    # Component 3: Multi-Model LLM Client
+    "pybreaker>=1.2.0",           # Circuit breaker pattern
+    
+    # Component 4: Document Ingestion Pipeline
+    # Numba constraint to ensure Python 3.11+ compatibility (unstructured dependency)
+    "numba>=0.57.0",
+    # Unified document parsing (Apache 2.0)
+    "unstructured[all-docs]>=0.16.0",
+    # Academic/structured PDF parsing (MIT)
+    "docling>=1.0.0",
+    # Format detection (MIT)
+    "python-magic>=0.4.27",
+    # Windows binary for libmagic (required on Windows)
+    "python-magic-bin>=0.4.14; sys_platform == 'win32'",
+    # Language detection (Apache 2.0)
+    "langdetect>=1.0.9",
+    # Text encoding fixes (MIT)
+    "ftfy>=6.2.0",
+    # Additional archive support (LGPL/MIT)
+    "py7zr>=0.21.0",
+    "rarfile>=4.2.0",
+    # File type detection (MIT)
+    "filetype>=1.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "pytest-xdist>=3.5.0",
+    "httpx>=0.26.0",
+    "respx>=0.20.0",
+    "memory-profiler>=0.61.0",
+    "line-profiler>=4.1.0",
+]
+lint = [
+    "ruff>=0.2.0",
+    "python-lsp-ruff>=2.0.0",  # LSP support for ruff
+    "mypy>=1.8.0",
+    "black>=24.1.0",
+]
+docker = [
+    "docker>=7.0.0",  # Docker SDK for Python
+    "pytest-docker>=3.0.0",  # Docker testing utilities
+]
+docs = [
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.5.6",
+]
+
+[project.scripts]
+rlm-server = "rlm.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend/rlm"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+select = [
+    "E",   # pycodestyle errors
+    "F",   # Pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "W",   # pycodestyle warnings
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+ignore = ["E501"]  # Line too long (handled by formatter)
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow tests",
+    "memory: Memory-intensive tests",
+]
+
+[tool.coverage.run]
+source = ["backend/rlm"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
