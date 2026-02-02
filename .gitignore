@@ -1,0 +1,215 @@
+# ================================================
+# RLM Document Retrieval System - .gitignore
+# ================================================
+
+# -----------------------------------------------
+# Environment & Secrets
+# -----------------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.crt
+*.p12
+secrets/
+credentials/
+config/local*
+config/production*
+config/staging*
+
+# -----------------------------------------------
+# Python
+# -----------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+*.log
+.pyre/
+.pytype/
+cython_debug/
+.ruff_cache/
+.mypy_cache/
+dmypy.json
+*.py,cover
+.hypothesis/
+
+# UV Package Manager
+.uv/
+uv.lock
+
+# -----------------------------------------------
+# Node.js / JavaScript / TypeScript
+# -----------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+dist/
+dist-ssr/
+*.local
+*.tsbuildinfo
+.cache/
+.parcel-cache/
+.vite/
+.next/
+out/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+
+# -----------------------------------------------
+# IDE & Editor
+# -----------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.AppleDouble
+.LSOverride
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.tmproj
+*.esproj
+*.code-workspace
+
+# -----------------------------------------------
+# OS Generated
+# -----------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# -----------------------------------------------
+# Logs & Data
+# -----------------------------------------------
+logs/
+*.log
+log/
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.duckdb
+*.parquet
+*.feather
+cache/
+.temp/
+tmp/
+temp/
+*.tmp
+
+# -----------------------------------------------
+# Application Specific
+# -----------------------------------------------
+# Trajectory logs
+trajectories/
+trajectory_logs/
+
+# Session data
+sessions/
+.session_cache/
+
+# Document processing artifacts
+uploads/
+processed/
+chunks/
+embeddings/
+vectors/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Testing artifacts
+test-results/
+coverage/
+*.lcov
+
+# Build outputs
+build/
+dist/
+*.spec
+
+# Documentation builds
+docs/_build/
+site/
+
+# -----------------------------------------------
+# Model & Binary Files
+# -----------------------------------------------
+*.pt
+*.pth
+*.h5
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+*.tflite
+*.mlmodel
+models/
+checkpoints/
+
+# -----------------------------------------------
+# Miscellaneous
+# -----------------------------------------------
+*.bak
+*.backup
+*.orig
+*.rej
+*.swo
+*.swp
+*~
+*.tmp
+*.temp
+.cache/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terragrunt-cache/
+*.plan
